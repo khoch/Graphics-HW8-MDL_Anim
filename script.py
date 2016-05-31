@@ -114,8 +114,17 @@ def first_pass( commands ):
   appropirate value. 
   ===================="""
 
+knobs = []
 def second_pass( commands, num_frames ):
-    pass
+    for frame in range(num_frames):
+        knobs.append(dict())
+        for command in commands:
+            if command[0]=="vary":
+                if frame >= command[2] and frame <= command[3]:
+                    inc = (1.0)*(command[5]-command[4])/(command[3]-command[2])
+                    knobs[frame].append(command[1], command[4]+(inc*frame))
+
+
 
 def run(filename):
     """
